@@ -71,7 +71,7 @@ public class NotaFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            adapterNotas = new MyNotaRecyclerViewAdapter(notaList, mListener);
+            adapterNotas = new MyNotaRecyclerViewAdapter(notaList,mListener);
             recyclerView.setAdapter(adapterNotas);
         }
         return view;
