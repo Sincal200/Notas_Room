@@ -70,7 +70,7 @@ public class NotaFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ) {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
