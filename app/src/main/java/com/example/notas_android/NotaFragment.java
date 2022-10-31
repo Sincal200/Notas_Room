@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,13 +72,19 @@ public class NotaFragment extends Fragment {
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount,StaggeredGridLayoutManager.VERTICAL));
+                DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+                float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+                int numeroColumnas = (int) (dpWidth / 180);
+
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(numeroColumnas,StaggeredGridLayoutManager.VERTICAL));
             }
 
             notaList = new ArrayList<>();
             notaList.add(new Nota("Lista de la compra","Comprar Pan Tostado",true, android.R.color.holo_blue_light));
             notaList.add(new Nota("Recordar","He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro",false, android.R.color.holo_green_light));
             notaList.add(new Nota("Cumpleaños (fiesta)","\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",true, android.R.color.holo_orange_light));
+            notaList.add(new Nota("Recordar","He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro",false, android.R.color.holo_green_light));
+            notaList.add(new Nota("Recordar","He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro",false, android.R.color.holo_green_light));
 
             adapterNotas = new MyNotaRecyclerViewAdapter(notaList,mListener);
             recyclerView.setAdapter(adapterNotas);
