@@ -1,10 +1,13 @@
-package com.example.notas_android;
+package com.example.notas_android.db;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.example.notas_android.db.dao.NotaDao;
+import com.example.notas_android.db.entity.NotaEntity;
 
 @Database(entities = {NotaEntity.class}, version = 1)
 public abstract class NotaRoomDataBase extends RoomDatabase {

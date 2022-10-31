@@ -1,4 +1,4 @@
-package com.example.notas_android;
+package com.example.notas_android.ui;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.example.notas_android.db.entity.NotaEntity;
+import com.example.notas_android.R;
 import com.example.notas_android.databinding.FragmentItemBinding;
 
 import java.util.List;

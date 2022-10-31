@@ -1,7 +1,8 @@
-package com.example.notas_android;
+package com.example.notas_android.ui;
 
 import android.os.Bundle;
 
+import com.example.notas_android.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
