@@ -5,6 +5,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.notas_android.NuevaNotaDialogViewModel;
 import com.example.notas_android.R;
 import com.example.notas_android.db.entity.NotaEntity;
 
@@ -33,6 +36,7 @@ public class NotaFragment extends Fragment {
     private int mColumnCount = 2;
     private List<NotaEntity> notaList;
     private MyNotaRecyclerViewAdapter adapterNotas;
+    private NuevaNotaDialogViewModel notaViewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -80,16 +84,24 @@ public class NotaFragment extends Fragment {
             }
 
             notaList = new ArrayList<>();
-            notaList.add(new NotaEntity("Lista de la compra","Comprar Pan Tostado",true, "#FFFFFF"));
-            notaList.add(new NotaEntity("Recordar","He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro",false, "#FFFFFF"));
-            notaList.add(new NotaEntity("Cumpleaños (fiesta)","\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",true, "#FFFFFF"));
-            notaList.add(new NotaEntity("Recordar","He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro",false, "#FFFFFF"));
-            notaList.add(new NotaEntity("Recordar","He aparcado el coche en la calle República Argentina, no olvidarme de pagar en el parquímetro",false, "#FFFFFF"));
 
             adapterNotas = new MyNotaRecyclerViewAdapter(notaList,getActivity());
             recyclerView.setAdapter(adapterNotas);
+
+            lanzarViewModel();
         }
         return view;
+    }
+
+    private void lanzarViewModel() {
+        notaViewModel = new ViewModelProvider(getActivity())
+                .get(NuevaNotaDialogViewModel.class);
+        notaViewModel.getAllNotas().observe(getActivity(), new Observer<List<NotaEntity>>() {
+            @Override
+            public void onChanged(List<NotaEntity> notaEntities) {
+                adapterNotas.setNuevasNotas(notaEntities);
+            }
+        });
     }
 
 }

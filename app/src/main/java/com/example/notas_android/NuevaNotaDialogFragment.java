@@ -19,9 +19,9 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
-public class NuevaNotaDialogFragment extends DialogFragment {
+import com.example.notas_android.db.entity.NotaEntity;
 
-    private NuevaNotaDialogViewModel mViewModel;
+public class NuevaNotaDialogFragment extends DialogFragment {
 
     public static NuevaNotaDialogFragment newInstance() {
         return new NuevaNotaDialogFragment();
@@ -31,12 +31,7 @@ public class NuevaNotaDialogFragment extends DialogFragment {
     private RadioGroup rgColor;
     private Switch swNotaFavorita;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(NuevaNotaDialogViewModel.class);
-        // TODO: Use the ViewModel
-    }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,11 +55,16 @@ public class NuevaNotaDialogFragment extends DialogFragment {
                         }
 
                         boolean esFavorita = swNotaFavorita.isChecked();
+
+                        //Comunicar al viewmodel el nuevo dato
+                        NuevaNotaDialogViewModel mViewModel = new ViewModelProvider(getActivity()).get(NuevaNotaDialogViewModel.class);
+                        mViewModel.insertarNota(new NotaEntity(titulo,contenido,esFavorita,color));
+                        dialog.dismiss();
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                        dialog.dismiss();
                     }
                 });
 

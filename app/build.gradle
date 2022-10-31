@@ -53,5 +53,11 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$rootProject.2.4.3"
     androidTestImplementation "androidx.room:room-testing:$rootProject.2.4.3"
 
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata:$rootProject.2.5.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.2.5.1"
+
 
 }
