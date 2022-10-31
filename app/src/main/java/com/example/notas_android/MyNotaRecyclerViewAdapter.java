@@ -2,8 +2,8 @@ package com.example.notas_android;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,12 +16,12 @@ import java.util.List;
 public class MyNotaRecyclerViewAdapter extends RecyclerView.Adapter<MyNotaRecyclerViewAdapter.ViewHolder> {
 
 
-    private final List<Nota> mValues;
-    private final NotasInteractionListener mListener;
+    private final List<NotaEntity> mValues;
+    private Context ctx;
 
-    public MyNotaRecyclerViewAdapter(List<Nota> items, NotasInteractionListener listener) {
+    public MyNotaRecyclerViewAdapter(List<NotaEntity> items, Context ctx) {
         mValues = items;
-        mListener = listener;
+        this.ctx = ctx;
     }
 
     @Override
@@ -42,9 +42,7 @@ public class MyNotaRecyclerViewAdapter extends RecyclerView.Adapter<MyNotaRecycl
         }
 
         holder.ivFavorita.setOnClickListener(view -> {
-            if( null != mListener){
-                mListener.favoritaNotaClick(holder.mItem);
-            }
+
         });
     }
 
@@ -57,7 +55,7 @@ public class MyNotaRecyclerViewAdapter extends RecyclerView.Adapter<MyNotaRecycl
         public final TextView tvTitulo;
         public final TextView tvContenido;
         public final ImageView ivFavorita;
-        public Nota mItem;
+        public NotaEntity mItem;
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
