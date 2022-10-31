@@ -3,6 +3,7 @@ package com.example.notas_android;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.notas_android.placeholder.PlaceholderContent;
+import java.util.List;
+
 
 /**
  * A fragment representing a list of Items.
+ *
  */
 public class NotaFragment extends Fragment {
 
@@ -23,6 +26,9 @@ public class NotaFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private NotasInteractionListener mListener;
+    private List<Nota> notaList;
+    private MyNotaRecyclerViewAdapter adapterNotas;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -64,8 +70,21 @@ public class NotaFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyNotaRecyclerViewAdapter(PlaceholderContent.ITEMS));
+
+            adapterNotas = new MyNotaRecyclerViewAdapter(notaList, mListener);
+            recyclerView.setAdapter(adapterNotas);
         }
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof NotasInteractionListener){
+            mListener = (NotasInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + "must implement NotasInteractionListener");
+        }
     }
 }
