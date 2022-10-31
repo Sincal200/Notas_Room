@@ -1,6 +1,7 @@
 package com.example.notas_android;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -69,7 +70,7 @@ public class NotaFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
