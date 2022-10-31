@@ -15,6 +15,7 @@ import java.util.List;
 
 public class MyNotaRecyclerViewAdapter extends RecyclerView.Adapter<MyNotaRecyclerViewAdapter.ViewHolder> {
 
+
     private final List<Nota> mValues;
     private final NotasInteractionListener mListener;
 
